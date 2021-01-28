@@ -1,12 +1,12 @@
 import Head from 'next/head'
+import Home from '../views/Home'
 
-export default function Home() {
+const Index = () => {
   return (
-    <div>
-      <h1>555</h1>
-      <h1>
-        55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-      </h1>
-    </div>
+    <>
+      <Home />
+    </>
   )
 }
+
+export default Index
