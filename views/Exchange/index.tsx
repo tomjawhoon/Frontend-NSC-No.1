@@ -10,10 +10,10 @@ const Exchange_H = () => {
       <Header />
       <Container>
         <Exchange_Container>
-          <div className="exchange-column-right">
+          <div className="exchange-column-right" data-aos="fade-left" data-aos-delay="400">
             <BoxMetamask />
           </div>
-          <div className="exchange-column-left">
+          <div className="exchange-column-left" data-aos="fade-right" data-aos-delay="400">
             <ExchangeContainer />
           </div>
         </Exchange_Container>
