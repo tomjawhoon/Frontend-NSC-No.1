@@ -11,34 +11,34 @@ const Header = () => {
     <>
       <Container>
         <Box_header>
-          <Box_logo>
+          <Box_logo data-aos="zoom-in" data-aos-delay="250">
             <Logo src="/static/images/block.png" />
             <a>BLOCKCHAIN</a>
           </Box_logo>
           <Menu_isDesktop>
             <ul>
               <Link href="/exchange">
-                <a>
+                <a data-aos="fade-up-left" data-aos-delay="150">
                   <li className={`${router.pathname === '/exchange' || '/' ? 'pathname' : ' '}`}>Exchange</li>
                 </a>
               </Link>
               <Link href="/wallet">
-                <a>
+                <a data-aos="fade-up-left" data-aos-delay="250">
                   <li className={`${router.pathname === '/wallet' ? 'pathname' : ' '}`}>Wallet</li>
                 </a>
               </Link>
               <Link href="/news">
-                <a>
+                <a data-aos="fade-up-left" data-aos-delay="350">
                   <li className={`${router.pathname === '/news' ? 'pathname' : ' '}`}>News</li>
                 </a>
               </Link>
               <Link href="/about">
-                <a>
+                <a data-aos="fade-up-left" data-aos-delay="450">
                   <li className={`${router.pathname === '/about' ? 'pathname' : ' '}`}>About</li>
                 </a>
               </Link>
               <Link href="/terms">
-                <a>
+                <a data-aos="fade-up-left" data-aos-delay="550">
                   <li className={`${router.pathname === '/terms' ? 'pathname' : ' '}`}>Terms</li>
                 </a>
               </Link>
