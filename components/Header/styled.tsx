@@ -6,9 +6,10 @@ export const Container = styled.div`
   box-sizing: border-box;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
   height: 67px;
   padding: relative;
+  background-color: white;
 
   .pathname {
     font-size: 20px;

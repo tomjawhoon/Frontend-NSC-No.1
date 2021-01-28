@@ -17,9 +17,9 @@ const Header = () => {
           </Box_logo>
           <Menu_isDesktop>
             <ul>
-              <Link href="/wallet">
+              <Link href="/exchange">
                 <a>
-                  <li className={`${router.pathname === '/' ? 'pathname' : ' '}`}>Home</li>
+                  <li className={`${router.pathname === '/exchange' || '/' ? 'pathname' : ' '}`}>Exchange</li>
                 </a>
               </Link>
               <Link href="/wallet">
