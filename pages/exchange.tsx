@@ -1,6 +1,6 @@
 import Exchange_H from '../views/Exchange'
 
-const Index = () => {
+const Exchange = () => {
   return (
     <>
       <Exchange_H />
@@ -8,4 +8,4 @@ const Index = () => {
   )
 }
 
-export default Index
+export default Exchange
