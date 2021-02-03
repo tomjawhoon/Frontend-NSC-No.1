@@ -8,12 +8,17 @@ export const Container = styled.div`
 
 export const Exchange_Container = styled.div`
   position: relative;
-  display: block;
+  display: flex;
   flex-direction: column;
   padding: 15px;
   width: 100%;
 
+  .exchange-column-left {
+    margin-top: 15px;
+  }
+
   @media (min-width: 1080px) {
+    display: block;
     flex: none;
     width: 85%;
     .exchange-column-right {
@@ -24,7 +29,6 @@ export const Exchange_Container = styled.div`
     .exchange-column-left {
       display: block;
       width: 54%;
-      background-color: #fff;
     }
   }
 `
