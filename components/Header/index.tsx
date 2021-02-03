@@ -46,7 +46,7 @@ const Header = () => {
               </Link>
             </ul>
           </Menu_isDesktop>
-          <Menu_isMobile>
+          <Menu_isMobile data-aos="fade-left" data-aos-delay="250">
             <button>
               <FontAwesomeIcon icon={faBell} />
             </button>
