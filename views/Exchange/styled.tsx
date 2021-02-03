@@ -29,6 +29,7 @@ export const Exchange_Container = styled.div`
     .exchange-column-left {
       display: block;
       width: 54%;
+      margin-top: 0px;
     }
   }
 `
