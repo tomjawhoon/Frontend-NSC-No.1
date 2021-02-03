@@ -39,6 +39,11 @@ export const Metamask = styled.div`
       width: 100%;
       display: block;
       text-align: center;
+      cursor: pointer;
+    }
+    a:hover {
+      color: #3f5eab;
+      background: #fff;
     }
   }
   img {

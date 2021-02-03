@@ -13,7 +13,9 @@ const Header = () => {
         <Box_header>
           <Box_logo data-aos="zoom-in" data-aos-delay="250">
             <Logo src="/static/images/block.png" />
-            <a>BLOCKCHAIN</a>
+            <Link href="/">
+              <a>BLOCKCHAIN</a>
+            </Link>
           </Box_logo>
           <Menu_isDesktop>
             <ul>
