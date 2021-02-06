@@ -25,6 +25,10 @@ export const Metamask = styled.div`
     font-size: 15px;
     color: white;
   }
+  .wallet-type-Address {
+    font-size: 13px;
+    color: white;
+  }
   .wallet-type-connect {
     float: left;
     width: 100%;

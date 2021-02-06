@@ -5,7 +5,6 @@ export const Container = styled.div`
   justify-content: center;
   width: 100%;
 `
-
 export const Exchange_Container = styled.div`
   position: relative;
   display: flex;
@@ -17,6 +16,12 @@ export const Exchange_Container = styled.div`
     margin-top: 15px;
   }
 
+  .exchange-column-under {
+    float: right;
+    display: block;
+    width: 45%;
+  }
+
   @media (min-width: 1080px) {
     display: block;
     flex: none;
@@ -26,10 +31,12 @@ export const Exchange_Container = styled.div`
       display: block;
       width: 45%;
     }
+    
     .exchange-column-left {
       display: block;
       width: 54%;
       margin-top: 0px;
     }
+    
   }
 `

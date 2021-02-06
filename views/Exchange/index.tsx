@@ -3,6 +3,7 @@ import ExchangeContainer from './components/exchangecontainer'
 import BoxMetamask from './components/Metamask'
 
 import { Exchange_Container, Container } from './styled'
+import CheckBalance from './components/Balance'
 
 const Exchange_H = () => {
   return (
@@ -13,8 +14,13 @@ const Exchange_H = () => {
           <div className="exchange-column-right" data-aos="fade-left" data-aos-delay="400">
             <BoxMetamask />
           </div>
+
           <div className="exchange-column-left" data-aos="fade-right" data-aos-delay="400">
             <ExchangeContainer />
+          </div>
+
+          <div className="exchange-column-under" data-aos="fade-left" data-aos-delay="400">
+            <CheckBalance />
           </div>
         </Exchange_Container>
       </Container>
