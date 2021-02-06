@@ -1,12 +1,28 @@
 import { Balance } from './styled'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { truncate } from 'fs'
+import { getAccountAddress } from '../../../../services'
+// import { getAccount } from './getbalance'
 
 const CheckBalance = () => {
   const [newId, setNewId] = useState()
   const [price, setPrice] = useState()
   const [balance, setBalance] = useState()
+  const [data, setData] = useState<any>()
   const [moreCoins, setMoreCoin] = useState<boolean>(false)
+  useEffect(() => {
+    getAccount();
+  }, [])
+  const getAccount = async () => {
+    console.log("eiei")
+    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+    const account = accounts[0];
+    let response = await getAccountAddress({}, { addressMetamask: account });
+    // console.log("response", response)
+    setData(response.data)
+    // return response;
+    // showAccount.innerHTML = account;
+  }
   const mapCoins = () => {
     const hiddenCoin = (index) => {
       if (index < 9) {
@@ -23,21 +39,21 @@ const CheckBalance = () => {
     // ${index > 9 && moreCoins === false ? 'height-0' : 'height-auto'}
     return (
       <>
-        {Array.from(Array(50).keys()).map((item: any, index: number) => (
+        {data?.map((item: any, index: number) => (
           <React.Fragment key={index}>
             <div className={`token-item-box ${hiddenCoin(index)}`}>
               <div className="box-content">
                 <div className="logo-coin">
-                  <img src="/static/images/ethereum-coin.png" />
+                  <img src={item.images_coin} />
                 </div>
                 <div className="box-code-name">
-                  <div className="code-coin">ETH</div>
-                  <div className="name-coin">Ethereum</div>
+                  <div className="code-coin">{item.code_coin}</div>
+                  <div className="name-coin">{item.name_coin}</div>
                 </div>
               </div>
               <input
                 className="box-balance"
-                value="1,1111.123456789012345655555555555555555555555555555555555"
+                value={item.balance_coin}
                 onChange={() => {
                   undefined
                 }}

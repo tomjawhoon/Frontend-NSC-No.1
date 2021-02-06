@@ -19,8 +19,6 @@ const BoxMetamask = () => {
     // showAccount.innerHTML = account;
   }
   console.log("balance", balance)
-  console.log("balance", balance)
-
   return (
     <Metamask>
       <div className={`${price ? 'container-metamask have-address' : 'container-metamask'}`}>
