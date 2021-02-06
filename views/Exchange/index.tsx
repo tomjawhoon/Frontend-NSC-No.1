@@ -23,7 +23,7 @@ const Exchange_H = () => {
           </Exchange_Container>
         </div>
         <div className="Box-Coins-Table">
-          <div className="Coins-Table" data-aos="fade-up" data-aos-delay="300">
+          <div className="Coins-Table" data-aos="fade-up" data-aos-delay="100">
             <CoinsTable />
           </div>
         </div>
