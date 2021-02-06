@@ -1,25 +1,25 @@
 import React, { ReactElement, useEffect, useState } from 'react'
 import CoinGecko from 'coingecko-api'
 const coinGeckoClient = new CoinGecko()
-import { Logo, Tables_Coin } from './styled'
+import { Logo, Tables_Coin, Table_Coin_isMobile } from './styled'
 import { formatNumber } from '../../../../utils/numberFormat'
 import { Input, Button, Space, Table } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
 import Highlighter from 'react-highlight-words'
+import axios from 'axios'
 
 const CoinsTable = () => {
   const [data, setData] = useState<any>()
-
   useEffect(() => {
     fetchData()
   }, [])
 
   const fetchData = async () => {
-    const result = await coinGeckoClient.coins.markets({
-      order: CoinGecko.ORDER.MARKET_CAP_DESC,
-    })
-    setData(result.data)
+    const res = await axios.get('/api/coinmarketcap')
+    setData(res.data)
   }
+
+  const res = axios.get('/api/coinmarketcap')
 
   const [searchText, setSearchText] = useState<any>()
   const [searchInput, setSearchInput] = useState<any>()
@@ -129,10 +129,43 @@ const CoinsTable = () => {
     },
   ]
 
+  const columnsMobile = [
+    {
+      title: 'Logo',
+      dataIndex: 'image',
+      key: 'image',
+      render: (logo) => (
+        <Logo>
+          <img src={logo} />
+        </Logo>
+      ),
+    },
+    {
+      title: 'Symbol',
+      dataIndex: 'symbol',
+      key: 'symbol',
+      render: (text) => <div>{text}</div>,
+      ...getColumnSearchProps('symbol'),
+    },
+    {
+      title: 'Price ($)',
+      key: 'ath',
+      dataIndex: 'ath',
+      render: (price) => {
+        return <div>{formatNumber(price)}</div>
+      },
+    },
+  ]
+
   return (
-    <Tables_Coin>
-      <Table columns={columns} dataSource={data} rowKey={'id'} />
-    </Tables_Coin>
+    <React.Fragment>
+      <Table_Coin_isMobile>
+        <Table columns={columnsMobile} dataSource={data} rowKey={'id'} />
+      </Table_Coin_isMobile>
+      <Tables_Coin>
+        <Table columns={columns} dataSource={data} rowKey={'id'} />
+      </Tables_Coin>
+    </React.Fragment>
   )
   // return <div>{JSON.stringify(data)}</div>
 }

@@ -1,5 +1,19 @@
 import styled from 'styled-components'
 
+export const Table_Coin_isMobile = styled.div`
+  display: block;
+  width: 100%;
+  height: auto;
+  .ant-pagination-item {
+    min-width: 25px;
+    margin-right: 4px;
+    font-size: 10px;
+  }
+  @media (min-width: 615px) {
+    display: none;
+  }
+`
+
 export const Tables_Coin = styled.div`
   display: none;
   @media (min-width: 615px) {
