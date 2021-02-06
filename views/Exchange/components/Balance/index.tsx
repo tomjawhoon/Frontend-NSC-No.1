@@ -35,7 +35,13 @@ const CheckBalance = () => {
                   <div className="name-coin">Ethereum</div>
                 </div>
               </div>
-              <input className="box-balance" value="1,1111.123456789012345655555555555555555555555555555555555" />
+              <input
+                className="box-balance"
+                value="1,1111.123456789012345655555555555555555555555555555555555"
+                onChange={() => {
+                  undefined
+                }}
+              />
             </div>
           </React.Fragment>
         ))}

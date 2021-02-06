@@ -11,6 +11,7 @@ export const Metamask = styled.div`
     border-radius: 3px;
     padding: 18px;
     margin-bottom: 10px;
+    font-family: 'Poppins', sans-serif;
   }
 
   .have-address {
