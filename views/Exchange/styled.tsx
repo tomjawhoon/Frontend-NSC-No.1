@@ -4,6 +4,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
+  background-color: #e6e6e6;
 `
 export const Exchange_Container = styled.div`
   position: relative;
@@ -22,6 +23,10 @@ export const Exchange_Container = styled.div`
     width: 45%;
   }
 
+  .Coins-Table {
+    width: 100%;
+    background-color: #ffffff;
+  }
   @media (min-width: 1080px) {
     display: block;
     flex: none;
@@ -31,12 +36,11 @@ export const Exchange_Container = styled.div`
       display: block;
       width: 45%;
     }
-    
+
     .exchange-column-left {
       display: block;
       width: 54%;
       margin-top: 0px;
     }
-    
   }
 `

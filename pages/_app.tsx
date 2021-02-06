@@ -1,5 +1,6 @@
 import '../styles/globals.css'
 import 'aos/dist/aos.css'
+import 'antd/dist/antd.css'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import { config } from '@fortawesome/fontawesome-svg-core'
 import AOS from 'aos'

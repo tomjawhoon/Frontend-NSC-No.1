@@ -11,6 +11,7 @@ export const Container = styled.div`
   padding: relative;
   background-color: white;
 
+
   .pathname {
     font-size: 20px;
     font-weight: 700;

@@ -10,5 +10,9 @@ const nextConfig = {
         __CFBundleIdentifier: undefined,
     }
 }
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+    enabled: process.env.ANALYZE === 'true',
+})
 
+module.exports = withBundleAnalyzer()
 module.exports = withOffline(nextConfig)
