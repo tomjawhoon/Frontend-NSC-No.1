@@ -1,27 +1,23 @@
 import { Metamask } from './styled'
 import { useState } from 'react'
-import axios from 'axios'
+import Web3 from 'web3'
+import { getAccountAddress } from '../../../../services'
 
 const BoxMetamask = () => {
   const [newId, setNewId] = useState()
-  const [price, setPrice] = useState()
+  const [price, setPrice] = useState<any>()
   const [balance, setBalance] = useState()
 
   const getAccount = async () => {
-    console.log("eiei")
-    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-    const account = accounts[0];
-    console.log("account", account)
+    const web3 = new Web3(Web3.givenProvider)
+    const accounts = await web3.eth.getAccounts()
+    const account = accounts[0]
     setPrice(account)
-    const response = await axios.post('http://localhost:5001/checkbalance', { //ETH
-      // valueinput: valueinput, //0.005 ค่าที่กรอกในช่องอ่านั้นแหละ
-      addressMetamask: account, //WETH -USDC
-      // totoken: MKR,
-    })
-    setBalance(response.data) //10
+    const response = await getAccountAddress({}, { addressMetamask: account })
+    setBalance(response.data)
     // showAccount.innerHTML = account;
   }
-  console.log("show =>", balance)
+
   return (
     <Metamask>
       <div className="wallet-logo-box">
