@@ -15,12 +15,11 @@ const CoinsTable = () => {
   }, [])
 
   const fetchData = async () => {
-    const res = await axios.get('/api/coinmarketcap')
-    setData(res.data)
+    const result = await coinGeckoClient.coins.markets({
+      order: CoinGecko.ORDER.MARKET_CAP_DESC,
+    })
+    setData(result.data)
   }
-
-  const res = axios.get('/api/coinmarketcap')
-
   const [searchText, setSearchText] = useState<any>()
   const [searchInput, setSearchInput] = useState<any>()
   const [searchedColumn, setSearchedColumn] = useState<any>()
