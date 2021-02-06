@@ -9,14 +9,17 @@ const BoxMetamask = () => {
   const [balance, setBalance] = useState()
 
   const getAccount = async () => {
-    const web3 = new Web3(Web3.givenProvider)
-    const accounts = await web3.eth.getAccounts()
-    const account = accounts[0]
+    console.log("eiei")
+    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+    const account = accounts[0];
+    console.log("account", account)
     setPrice(account)
     const response = await getAccountAddress({}, { addressMetamask: account })
     setBalance(response.data)
     // showAccount.innerHTML = account;
   }
+  console.log("balance", balance)
+  console.log("balance", balance)
 
   return (
     <Metamask>
