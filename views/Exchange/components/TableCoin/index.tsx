@@ -121,7 +121,7 @@ const CoinsTable = () => {
       key: 'market_cap',
       dataIndex: 'market_cap',
       render: (price) => {
-        return <div>${formatNumber(price)}</div>
+        return <div>{formatNumber(price)}</div>
       },
     },
   ]
