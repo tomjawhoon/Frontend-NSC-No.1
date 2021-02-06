@@ -4,6 +4,7 @@ export const Balance = styled.div`
   display: block;
   float: left;
   width: 100%;
+  font-family: 'Poppins', sans-serif;
 
   .assets-container {
     width: 100%;
