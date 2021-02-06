@@ -4,6 +4,7 @@ export const Table_Coin_isMobile = styled.div`
   display: block;
   width: 100%;
   height: auto;
+  overflow: auto;
   .ant-pagination-item {
     min-width: 25px;
     margin-right: 4px;
@@ -15,12 +16,22 @@ export const Table_Coin_isMobile = styled.div`
 `
 
 export const Tables_Coin = styled.div`
-  display: none;
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow-x: scroll;
+  background-color: #fff;
+  .ant-pagination-item {
+    min-width: 25px;
+    margin-right: 0px;
+    font-size: 10px;
+  }
   @media (min-width: 615px) {
     display: block;
     margin-top: 20px;
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
+    overflow-x: hidden;
     .ant-table-pagination.ant-pagination {
       padding-right: 26px;
     }

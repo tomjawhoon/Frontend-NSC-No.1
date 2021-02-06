@@ -159,9 +159,6 @@ const CoinsTable = () => {
 
   return (
     <React.Fragment>
-      <Table_Coin_isMobile>
-        <Table columns={columnsMobile} dataSource={data} rowKey={'id'} />
-      </Table_Coin_isMobile>
       <Tables_Coin>
         <Table columns={columns} dataSource={data} rowKey={'id'} />
       </Tables_Coin>
