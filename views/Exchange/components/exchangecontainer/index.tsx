@@ -1,7 +1,6 @@
 import { BoxAmount, Container, Dropdown_box, IsExpanded, BalanceCoin, Swap_box, Btn_Exchange } from './styled'
 import { useState } from 'react'
 import axios from 'axios';
-const {  Modal, Button  } = antd;
 import { checkcoin, swaptotalcoin } from '../../../../services'
 interface Props {
   result: { data: any; };
