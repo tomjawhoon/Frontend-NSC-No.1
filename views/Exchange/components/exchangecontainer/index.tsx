@@ -1,6 +1,8 @@
 import { BoxAmount, Container, Dropdown_box, IsExpanded, BalanceCoin, Swap_box, Btn_Exchange } from './styled'
 import { useState } from 'react'
 import axios from 'axios';
+const {  Modal, Button  } = antd;
+import { checkcoin, swaptotalcoin } from '../../../../services'
 interface Props {
   result: { data: any; };
   initialId: any,
@@ -20,7 +22,7 @@ const ExchangeContainer = (initialId) => {
   const [Price2, setPrice2] = useState(0)
   const [sum, setSum] = useState([])
   const [total, setTotal] = useState(null)
-  const [time, setTime] = useState('')
+  const [time, setTime] = useState(true)
   const WETH = "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2";
   const DAI = "0x6B175474E89094C44Da98b954EedeAC495271d0F";
   const OMG = "0xd26114cd6ee289accf82350c8d8487fedb8a0c07";
@@ -31,45 +33,16 @@ const ExchangeContainer = (initialId) => {
   // console.log("Price", Price)
   console.log("newId", newId)
   const onSave = async (valueinput: any) => {
-    const response = await axios.post('http://localhost:5001/checkcoin', { //ETH
-      valueinput: valueinput, //0.005 ค่าที่กรอกในช่องอ่านั้นแหละ
-      fromtoken: WETH, //WETH -USDC
-      // totoken: MKR,
-    })
-    //setPrice(response.data) //10
-    console.log("FROM NODE = MKR = ", response.data.bestRoute);
-    // console.log("from node ", response.data)
-    // const response2 = await axios.post('http://localhost:5001/totalcoin', {
-    //   // valueinput: valueinput,
-    //   valueinput: response.data.toString(),
-    //   fromtoken: MKR, //WETH -MKR
-    //   totoken: DAI,
-    // })
-    // setPrice1(response2.data)
-    // console.log("FROM NODE = DAI = ", response2.data);
-    // const response3 = await axios.post('http://localhost:5001/totalcoin', {
-    //   // valueinput: valueinput,
-    //   valueinput: response2.data.toString(),
-    //   fromtoken: DAI, //WETH -MKR
-    //   totoken: WETH,
-    // })
-    // setPrice2(response3.data)
-    // console.log("FROM NODE = WETH = ", response3.data);
-    console.log("sum ====>", sum)
-    setTotal({
-      // Price1: response.data,
-      // Price2: response2.data,
-      // Price3: response3.data,
-
-    })
-
-    const timestart = setTimeout(function () { onSave(valueinput) }, 1);
-    setTime(`${timestart}`)
+    console.log("valueinput", valueinput)
+    let response = await checkcoin({}, { valueinput: valueinput, fromtoken: WETH });
+    console.log("response", response)//"ETH -> USDT -> UNI -> MKR -> DAI -> ETH"
+    setSum(response.data)
+    let res_swaptotalcoin = await swaptotalcoin({}, { algorithm: response, valueinput: valueinput });
+    console.log("response_checkcoin", res_swaptotalcoin)
+    setHash(res_swaptotalcoin.data)
   }
-
   const ExpandedOne = () => {
     // const [newId, setNewId] = useState(initialId)
-
     return (
       <IsExpanded>
         <div className="fromCoin">เหรียญต้นทาง</div>
