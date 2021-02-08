@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 
+
 export const Metamask = styled.div`
   .container-metamask {
     background-color: #3f5eab;
