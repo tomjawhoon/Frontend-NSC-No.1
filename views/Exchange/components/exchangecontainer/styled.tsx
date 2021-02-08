@@ -8,11 +8,13 @@ export const Setmodal_margin = styled.div`
     }
 
 `
+
 export const Set_images = styled.div`
     .setimages{
       display: flex;
     align-items: center;
     width: 75px;
+
     img {
       width: 100%;
     }
@@ -21,6 +23,12 @@ export const Set_images = styled.div`
     .setprice{
       margin-left: 10px;
     }
+    .setimages1{
+      display: flex;
+    align-items: center;
+    width: 90px;
+    
+  }
 `
 export const Container = styled.div`
   display: flex;
@@ -160,6 +168,13 @@ export const Btn_Exchange = styled.div`
     text-align: center;
     width: 100%;
     color: #fff;
+  }
+  .spin-ex{
+    padding: 11px;
+    text-align: center;
+    width: 100%;
+    color: #fff;
+    
   }
 
   .exchange-btn:hover {

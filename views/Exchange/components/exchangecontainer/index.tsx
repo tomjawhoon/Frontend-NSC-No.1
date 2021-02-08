@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import axios from 'axios';
 import { checkcoin, swaptotalcoin } from '../../../../services'
 import { Button, Divider, Modal, Spin, Tag } from 'antd';
+import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
 
 
 interface Props {
@@ -64,11 +65,15 @@ const ExchangeContainer = (initialId) => {
       setCheck(false);
       setHash(res_swaptotalcoin.data.transaction_hash)
       setPrice(res_swaptotalcoin.data.arr_amount)
-      if (res_swaptotalcoin.data.arr_amount <= valueinput) {
+      console.log("parseFloat", parseFloat(res_swaptotalcoin.data.arr_amount))
+      console.log("show parseFloat", parseFloat(valueinput))
 
+      if (parseFloat(res_swaptotalcoin.data.arr_amount) <= parseFloat(valueinput)) {
+        setProfit(false)
         //low-profits
       } else {
-
+        //low-profits
+        setProfit(true)
       }
       showModal()
       //arr_amount
@@ -104,7 +109,7 @@ const ExchangeContainer = (initialId) => {
         </div>
         <BoxAmount>
           <input type="number" autoComplete="on" placeholder="Enter amount" min="0" step="0.1" onChange={(e) => setNewId(e.target.value)} />
-          <div className="notify-coin">จำนวนเหรียญของคุณไม่เพียงพอ</div>
+          {/* <div className="notify-coin">จำนวนเหรียญของคุณไม่เพียงพอ</div> */}
         </BoxAmount>
         <BalanceCoin>
           {/* <div className="value-balance">
@@ -117,7 +122,9 @@ const ExchangeContainer = (initialId) => {
             แลกเปลี่ยน
           </div>
         </Btn_Exchange>
-        {check ? <Spin /> : <div></div>}
+        <Btn_Exchange>
+          {check ? <div className="spin-ex" ><Spin size="large"/></div> : <div></div>}
+        </Btn_Exchange>
         {/* <Button type="primary" onClick={showModal}>
           Open Modal
       </Button> */}
@@ -131,15 +138,16 @@ const ExchangeContainer = (initialId) => {
                 <Divider></Divider>
               </Setmodal_margin>
             )
-
           })}
           </p>
           <Set_images>
             <p>
               <div className="setimages">
                 <img src="https://tokens.1inch.exchange/0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee.png" />
-                <div className="setprice"> ETH : {Price}
-
+                <div className="setprice"> <b>ETH : {Price}</b>
+                  {profit ? <div className="setimages1">
+                    <ArrowUpOutlined style={{ color: "green", fontSize: "20" }} /> High profit </div>
+                    : <div className="setimages1"> <ArrowDownOutlined style={{ color: "red", fontSize: "20" }} /> Low profit </div>}
                 </div>
               </div>
             </p></Set_images>
