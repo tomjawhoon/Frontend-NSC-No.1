@@ -196,6 +196,7 @@ const ExchangeContainer = (initialId) => {
                     </div>
                     : <div className="setimages1">
                       <ArrowDownOutlined style={{ color: "red", fontSize: "20" }} /> Low profit ({(Number(Price) - newId).toFixed(7)})
+                     <div><b>That might be a problem at DEX</b></div>
                     </div>}
                 </div>
               </div>
