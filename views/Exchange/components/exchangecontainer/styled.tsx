@@ -14,6 +14,13 @@ export const Setmodal_margin = styled.div`
 `
 
 export const Set_images = styled.div`
+    .setValue{
+      margin-left: 80px;
+      margin-top: -70px;
+    }
+    .settotalvalue{
+      margin-left: 60px;
+    }
     .setimages{
       display: flex;
     align-items: center;
@@ -26,12 +33,16 @@ export const Set_images = styled.div`
 
     .setprice{
       margin-left: 10px;
+
     }
     .setimages1{
-      display: flex;
+ 
     align-items: center;
-    width: 90px;
+
     
+  }
+  .setcost{
+    margin-left: 10px;
   }
 `
 export const Container = styled.div`

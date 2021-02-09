@@ -16,8 +16,6 @@ interface Props {
 
 //  const router = useRouter()
 const ExchangeContainer = (initialId) => {
-
-
   const router = useRouter()
   const token_code_one = 'ETH'
   const token_name_one = 'Ethereum'
@@ -25,7 +23,7 @@ const ExchangeContainer = (initialId) => {
   const token_code_two = 'DAI'
   const token_name_two = 'DAI'
   const [Hash, setHash] = useState([])
-  const [newId, setNewId] = useState(initialId)
+  const [newId, setNewId] = useState(null)
   const [Price, setPrice] = useState([])
   const [sum, setSum] = useState([])
   const [total, setTotal] = useState(null)
@@ -125,7 +123,7 @@ const ExchangeContainer = (initialId) => {
   }, []);
 
 
-  const ExpandedOne = () => {
+  const ExpandedOne = (): JSX.Element => {
 
     // const [newId, setNewId] = useState(initialId)
     return (
@@ -173,7 +171,7 @@ const ExchangeContainer = (initialId) => {
             return (
               <Setmodal_margin>
                 <div className="setmodal" key={index}>
-                  <span >Swap {index + 1} :  </span><a style={{color: 'unset'}} target='_blank' href={`https://kovan.etherscan.io/tx/${x}`}>  <Tag color="#108ee9">Hash</Tag></a>
+                  <span >Swap {index + 1} :  </span><a style={{ color: 'unset' }} target='_blank' href={`https://kovan.etherscan.io/tx/${x}`}>  <Tag color="#108ee9">Hash</Tag></a>
                   {/* <span>{Images.ETH}</span> */}
                   <img className="editimages" src={Images[sum[index]]} ></img> <ArrowRightOutlined></ArrowRightOutlined>
                   <img className="editimages" src={Images[sum[index + 1]]}></img>
@@ -187,10 +185,18 @@ const ExchangeContainer = (initialId) => {
             <p>
               <div className="setimages">
                 <img src="https://tokens.1inch.exchange/0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee.png" />
+              </div>
+              <div className="setValue">
+                <div className="setcost"><b>Cost : {newId}</b></div>
                 <div className="setprice"> <b>ETH : {Price}</b>
-                  {profit ? <div className="setimages1">
-                    <ArrowUpOutlined style={{ color: "green", fontSize: "20" }} /> High profit </div>
-                    : <div className="setimages1"> <ArrowDownOutlined style={{ color: "red", fontSize: "20" }} /> Low profit </div>}
+                  <div className="settotalvalue"></div>
+                  {profit ?
+                    <div className="setimages1">
+                      <ArrowUpOutlined style={{ color: "green", fontSize: "20" }} />  High profit {(Number(Price) - newId).toFixed(7)}
+                    </div>
+                    : <div className="setimages1">
+                      <ArrowDownOutlined style={{ color: "red", fontSize: "20" }} /> Low profit ({(Number(Price) - newId).toFixed(7)})
+                    </div>}
                 </div>
               </div>
             </p></Set_images>
