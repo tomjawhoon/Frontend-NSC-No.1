@@ -24,26 +24,26 @@ const Header = () => {
                   <li className={`${router.pathname === '/exchange' || '/' ? 'pathname' : ' '}`}>Exchange</li>
                 </a>
               </Link>
-              <Link href="/wallet">
+              {/* <Link href="/wallet">
                 <a data-aos="fade-up-left" data-aos-delay="250">
                   <li className={`${router.pathname === '/wallet' ? 'pathname' : ' '}`}>Wallet</li>
                 </a>
-              </Link>
-              <Link href="/news">
-                <a data-aos="fade-up-left" data-aos-delay="350">
+              </Link> */}
+              {/* <Link href="/news"> */}
+                <a  href="https://block.phuket.psu.ac.th/home" data-aos="fade-up-left" data-aos-delay="350">
                   <li className={`${router.pathname === '/news' ? 'pathname' : ' '}`}>News</li>
                 </a>
-              </Link>
-              <Link href="/about">
-                <a data-aos="fade-up-left" data-aos-delay="450">
+              {/* </Link> */}
+              {/* <Link href="/about"> */}
+                <a  href="https://block.phuket.psu.ac.th/about-us" data-aos="fade-up-left" data-aos-delay="450">
                   <li className={`${router.pathname === '/about' ? 'pathname' : ' '}`}>About</li>
                 </a>
-              </Link>
-              <Link href="/terms">
+              {/* </Link> */}
+              {/* <Link href="/terms">
                 <a data-aos="fade-up-left" data-aos-delay="550">
                   <li className={`${router.pathname === '/terms' ? 'pathname' : ' '}`}>Terms</li>
                 </a>
-              </Link>
+              </Link> */}
             </ul>
           </Menu_isDesktop>
           <Menu_isMobile data-aos="fade-left" data-aos-delay="250">

@@ -157,7 +157,7 @@ const ExchangeContainer = (initialId) => {
         </BalanceCoin>
         <Btn_Exchange>
           <div className="exchange-btn" onClick={() => onSave(newId)} >
-            แลกเปลี่ยน
+            Arbitrage
           </div>
         </Btn_Exchange>
         <Btn_Exchange>
@@ -196,7 +196,7 @@ const ExchangeContainer = (initialId) => {
                     </div>
                     : <div className="setimages1">
                       <ArrowDownOutlined style={{ color: "red", fontSize: "20" }} /> Low profit ({(Number(Price) - newId).toFixed(7)})
-                     <div><b>That might be a problem at DEX</b></div>
+                     <div><b>There might be a problem at DEX</b></div>
                     </div>}
                 </div>
               </div>
