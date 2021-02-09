@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start -p 5050"
+    "start": "next start -p 5050",
+    "export": "next export",
+    "build:static": "npm run build && num run export"
   },
   "dependencies": {
     "@ant-design/icons": "^4.4.0",

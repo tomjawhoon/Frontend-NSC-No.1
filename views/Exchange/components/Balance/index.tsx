@@ -15,7 +15,7 @@ const CheckBalance = () => {
   }, [])
   const getAccount = async () => {
     console.log("eiei")
-    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+    const accounts = await (window as any).ethereum.request({ method: 'eth_requestAccounts' });
     const account = accounts[0];
     let response = await getAccountAddress({}, { addressMetamask: account });
     // console.log("response", response)

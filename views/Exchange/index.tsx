@@ -4,7 +4,6 @@ import BoxMetamask from './components/Metamask'
 import CheckBalance from './components/Balance'
 import { Exchange_Container, Container } from './styled'
 import CoinsTable from './components/TableCoin'
-import Modalreload from './components/Modal'
 import React from 'react'
 
 const Exchange_H = () => {
