@@ -1,11 +1,11 @@
 import { BoxAmount, Container, Dropdown_box, IsExpanded, BalanceCoin, Swap_box, Btn_Exchange, Reload, Setmodal_margin, Set_images } from './styled'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import axios from 'axios';
 import { checkcoin, swaptotalcoin } from '../../../../services'
 import { Button, Divider, Modal, Spin, Tag } from 'antd';
-import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
+import { ArrowUpOutlined, ArrowDownOutlined, ArrowRightOutlined } from '@ant-design/icons';
 
 
 interface Props {
@@ -13,8 +13,11 @@ interface Props {
   initialId: any,
   valueinput: any,
 }
+
 //  const router = useRouter()
 const ExchangeContainer = (initialId) => {
+
+
   const router = useRouter()
   const token_code_one = 'ETH'
   const token_name_one = 'Ethereum'
@@ -28,6 +31,7 @@ const ExchangeContainer = (initialId) => {
   const [total, setTotal] = useState(null)
   const [check, setCheck] = useState(false)
   const [profit, setProfit] = useState(false)
+  const [img, setImg] = useState([])
   const WETH = "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2";
   // const DAI = "0x6B175474E89094C44Da98b954EedeAC495271d0F";
   // const OMG = "0xd26114cd6ee289accf82350c8d8487fedb8a0c07";
@@ -45,26 +49,40 @@ const ExchangeContainer = (initialId) => {
 
   const handleOk = () => {
     setIsModalVisible(false);
+    localStorage.setItem('Show', 'false');
   };
 
   const handleCancel = () => {
     setIsModalVisible(false);
+    localStorage.setItem('Show', 'false');
   };
   //===============================================================================================
   const onSave = async (valueinput: any) => {
     setCheck(true);
     console.log("valueinput", valueinput)
     let response = await checkcoin({}, { valueinput: valueinput, fromtoken: WETH });
-    console.log("response", response)//"ETH -> USDT -> UNI -> MKR -> DAI -> ETH"
-    setSum(response.data)
+    // console.log("response.data.bestRoute.bestRoute", response.data.bestRoute.bestRoute)
+    const algorithm_Front = response.data.bestRoute.bestRoute;
+    // localStorage.setItem('Hash', JSON.stringify(Hash));
+
+    // console.log("algorithm_Front", algorithm_Front.split(" -> "))
+    const arr_algo = algorithm_Front.split(" -> ")
+    // console.log("arr_algo", arr_algo) //array
+    setSum(arr_algo)
+    localStorage.setItem('Sum', JSON.stringify(arr_algo));
     let res_swaptotalcoin = await swaptotalcoin({}, { algorithm: response, valueinput: valueinput });
     console.log("response_checkcoin", res_swaptotalcoin)
-    //console.log("response_checkcoin", res_swaptotalcoin.data.transaction_hash)
-    //console.log("response_checkcoin", res_swaptotalcoin.data.arr_amount)
     if (res_swaptotalcoin && res_swaptotalcoin.status == 200) {
       setCheck(false);
       setHash(res_swaptotalcoin.data.transaction_hash)
       setPrice(res_swaptotalcoin.data.arr_amount)
+
+      localStorage.setItem('Hash', JSON.stringify(res_swaptotalcoin.data.transaction_hash));
+      localStorage.setItem('Price', JSON.stringify(res_swaptotalcoin.data.arr_amount));
+
+      localStorage.setItem('Show', 'true');
+
+
       console.log("parseFloat", parseFloat(res_swaptotalcoin.data.arr_amount))
       console.log("show parseFloat", parseFloat(valueinput))
 
@@ -78,13 +96,35 @@ const ExchangeContainer = (initialId) => {
       showModal()
       //arr_amount
     }
-
-
     // ตรงนี้
   }
+  const Images = {
+    'ETH': "https://tokens.1inch.exchange/0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee.png",
+    'USDC': "https://tokens.1inch.exchange/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48.png",
+    'MKR': "https://tokens.1inch.exchange/0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2.png",
+  }
+  console.log("all gori_sum_sum", sum)
+  console.log("Images", Images)
+
   const Clickhas = async (link: any) => {
     router.push(`https://kovan.etherscan.io/tx/${link}`)
   }
+
+  useEffect(() => {
+    const Hash = localStorage.getItem('Hash');
+    const Sum = localStorage.getItem('Sum');
+    const Price = localStorage.getItem('Price');
+    const Show = localStorage.getItem('Show');
+
+    if (Hash && Sum && Price && Show) {
+      setHash(JSON.parse(Hash));
+      setSum(JSON.parse(Sum));
+      setPrice(JSON.parse(Price));
+      setIsModalVisible(JSON.parse(Show));
+    }
+  }, []);
+
+
   const ExpandedOne = () => {
 
     // const [newId, setNewId] = useState(initialId)
@@ -123,7 +163,7 @@ const ExchangeContainer = (initialId) => {
           </div>
         </Btn_Exchange>
         <Btn_Exchange>
-          {check ? <div className="spin-ex" ><Spin size="large"/></div> : <div></div>}
+          {check ? <div className="spin-ex" ><Spin size="large" /></div> : <div></div>}
         </Btn_Exchange>
         {/* <Button type="primary" onClick={showModal}>
           Open Modal
@@ -133,7 +173,10 @@ const ExchangeContainer = (initialId) => {
             return (
               <Setmodal_margin>
                 <div className="setmodal" key={index}>
-                  <span >Swap {index + 1} : </span><span onClick={() => Clickhas(x)}>  <Tag color="#108ee9">Hash</Tag></span>
+                  <span >Swap {index + 1} :  </span><a style={{color: 'unset'}} target='_blank' href={`https://kovan.etherscan.io/tx/${x}`}>  <Tag color="#108ee9">Hash</Tag></a>
+                  {/* <span>{Images.ETH}</span> */}
+                  <img className="editimages" src={Images[sum[index]]} ></img> <ArrowRightOutlined></ArrowRightOutlined>
+                  <img className="editimages" src={Images[sum[index + 1]]}></img>
                 </div>
                 <Divider></Divider>
               </Setmodal_margin>

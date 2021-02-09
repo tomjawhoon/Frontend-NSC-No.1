@@ -7,6 +7,10 @@ export const Setmodal_margin = styled.div`
       justify-content: center;
     }
 
+    .editimages{
+      width: 35px;
+    }
+
 `
 
 export const Set_images = styled.div`
