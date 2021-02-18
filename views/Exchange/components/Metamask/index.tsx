@@ -1,5 +1,5 @@
 import { Metamask } from './styled'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Web3 from 'web3'
 import { getAccountAddress } from '../../../../services'
 
@@ -8,6 +8,10 @@ const BoxMetamask = () => {
   const [price, setPrice] = useState<any>()
   const [balance, setBalance] = useState()
 
+  useEffect(() => {
+    getAccount();
+  }, []);
+
   const getAccount = async () => {
     console.log("eiei")
     const accounts = await (window as any).ethereum.request({ method: 'eth_requestAccounts' });
@@ -15,9 +19,10 @@ const BoxMetamask = () => {
     console.log("account", account)
     setPrice(account)
     const response = await getAccountAddress({}, { addressMetamask: account })
-    setBalance(response.data)
+    setBalance(response as any)
     // showAccount.innerHTML = account;
   }
+
   console.log("balance", balance)
   return (
     <Metamask>
@@ -34,7 +39,7 @@ const BoxMetamask = () => {
               <div className="address-names">{price} copy</div>{' '}
             </>
           )}
-          {!price && (
+          {!balance && (
             <div className="wallet-type-connect" onClick={() => getAccount()}>
               <a>เชื่อมต่อ</a>
             </div>

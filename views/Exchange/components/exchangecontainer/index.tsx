@@ -60,31 +60,32 @@ const ExchangeContainer = (initialId) => {
     console.log("valueinput", valueinput)
     let response = await checkcoin({}, { valueinput: valueinput, fromtoken: WETH });
     // console.log("response.data.bestRoute.bestRoute", response.data.bestRoute.bestRoute)
-    const algorithm_Front = response.data.bestRoute.bestRoute;
+    console.log(response);
+    const algorithm_Front = response.bestRoute.bestRoute;
     // localStorage.setItem('Hash', JSON.stringify(Hash));
 
-    // console.log("algorithm_Front", algorithm_Front.split(" -> "))
+    console.log("algorithm_Front", algorithm_Front.split(" -> "))
     const arr_algo = algorithm_Front.split(" -> ")
-    // console.log("arr_algo", arr_algo) //array
+    console.log("arr_algo", arr_algo) //array
     setSum(arr_algo)
     localStorage.setItem('Sum', JSON.stringify(arr_algo));
-    let res_swaptotalcoin = await swaptotalcoin({}, { algorithm: response, valueinput: valueinput });
+    let res_swaptotalcoin = await swaptotalcoin({}, { route: algorithm_Front, valueinput: valueinput });
     console.log("response_checkcoin", res_swaptotalcoin)
-    if (res_swaptotalcoin && res_swaptotalcoin.status == 200) {
+    if (res_swaptotalcoin) {
       setCheck(false);
-      setHash(res_swaptotalcoin.data.transaction_hash)
-      setPrice(res_swaptotalcoin.data.arr_amount)
+      setHash(res_swaptotalcoin.transaction_hash)
+      setPrice(res_swaptotalcoin.arr_amount)
 
-      localStorage.setItem('Hash', JSON.stringify(res_swaptotalcoin.data.transaction_hash));
-      localStorage.setItem('Price', JSON.stringify(res_swaptotalcoin.data.arr_amount));
+      localStorage.setItem('Hash', JSON.stringify(res_swaptotalcoin.transaction_hash));
+      localStorage.setItem('Price', JSON.stringify(res_swaptotalcoin.arr_amount));
 
       localStorage.setItem('Show', 'true');
 
 
-      console.log("parseFloat", parseFloat(res_swaptotalcoin.data.arr_amount))
+      console.log("parseFloat", parseFloat(res_swaptotalcoin.arr_amount))
       console.log("show parseFloat", parseFloat(valueinput))
 
-      if (parseFloat(res_swaptotalcoin.data.arr_amount) <= parseFloat(valueinput)) {
+      if (parseFloat(res_swaptotalcoin.arr_amount) <= parseFloat(valueinput)) {
         setProfit(false)
         //low-profits
       } else {

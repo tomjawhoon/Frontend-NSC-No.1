@@ -19,7 +19,7 @@ const CheckBalance = () => {
     const account = accounts[0];
     let response = await getAccountAddress({}, { addressMetamask: account });
     // console.log("response", response)
-    setData(response.data)
+    setData(response)
     // return response;
     // showAccount.innerHTML = account;
   }
@@ -53,7 +53,7 @@ const CheckBalance = () => {
               </div>
               <input
                 className="box-balance"
-                value={item.balance_coin}
+                value={item.balance_coin.substr(0, 8)}
                 onChange={() => {
                   undefined
                 }}
