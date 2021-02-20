@@ -10,7 +10,7 @@ const BoxMetamask = () => {
 
   const getAccount = async () => {
     console.log("eiei")
-    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+    const accounts = await (window as any).ethereum.request({ method: 'eth_requestAccounts' });
     const account = accounts[0];
     console.log("account", account)
     setPrice(account)
