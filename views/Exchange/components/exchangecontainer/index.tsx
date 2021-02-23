@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import axios from 'axios';
 import { checkcoin, swaptotalcoin } from '../../../../services'
-import { Button, Divider, Modal, Spin, Tag } from 'antd';
+import { Button, Divider, Modal, Spin, Tag, Steps, Popover } from 'antd';
 import { ArrowUpOutlined, ArrowDownOutlined, ArrowRightOutlined } from '@ant-design/icons';
 
 
@@ -56,6 +56,7 @@ const ExchangeContainer = (initialId) => {
   };
   //===============================================================================================
   const onSave = async (valueinput: any) => {
+
     setCheck(true);
     console.log("valueinput", valueinput)
     let response = await checkcoin({}, { valueinput: valueinput, fromtoken: WETH });
@@ -125,6 +126,18 @@ const ExchangeContainer = (initialId) => {
 
 
   const ExpandedOne = (): JSX.Element => {
+    const customDot = (dot, { status, index }) => (
+      <Popover
+        content={
+          <span>
+            step {index} status: {status}
+          </span>
+        }
+      >
+        {dot}
+      </Popover>
+    );
+    const { Step } = Steps;
 
     // const [newId, setNewId] = useState(initialId)
     return (
@@ -162,11 +175,25 @@ const ExchangeContainer = (initialId) => {
           </div>
         </Btn_Exchange>
         <Btn_Exchange>
-          {check ? <div className="spin-ex" ><Spin size="large" /></div> : <div></div>}
+          {check ?
+            <Steps current={1} progressDot={customDot}>
+              {Hash.map((x, index) => {
+                // console.log("index=<>",index)
+                <div key={index}>
+                  <Step title="START" description="Just a Moment." />
+                  <Step title="In Progress" description="Just a Moment." />
+                  <Step title="Waiting" description="Just a Moment." />
+                  <Step title="Finish" description="Just a Moment." />
+                </div>
+                console.log("index=<>", index)
+              })}
+            </Steps>
+            : <div></div>}
         </Btn_Exchange>
         {/* <Button type="primary" onClick={showModal}>
           Open Modal
-      </Button> */}
+      </Button> */
+        }
         <Modal title="STATUS" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
           <p>{Hash.map((x, index) => {
             return (

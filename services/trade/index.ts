@@ -92,7 +92,7 @@ const swaptotaltoken = async (web3, route, valueinput) => {
 
         const pair = await getPair(TokenA, TokenB);
         const route = new Route([pair], TokenA);
-        const amountIn = fromDecimal(amount, TokenA.decimals);
+        const amountIn = Math.floor(fromDecimal(amount, TokenA.decimals));
         console.log({ amountIn })
         const trade = new Trade(route, new TokenAmount(TokenA, amountIn.toString()), TradeType.EXACT_INPUT);
         const price = +trade.executionPrice.toSignificant(6);
@@ -128,6 +128,7 @@ const swaptotaltoken = async (web3, route, valueinput) => {
         } else if (TokenB === WETH[chainId]) {
             console.log({
                 amountIn,
+                amountOutMin: amountOutMin.toString(),
                 amountInMax: amountInMax.toString(),
                 path,
                 to,
@@ -136,7 +137,7 @@ const swaptotaltoken = async (web3, route, valueinput) => {
             });
 
             const contractnew = await RouterContract.methods.swapTokensForExactETH(
-                web3.utils.toHex(amountIn.toString()),
+                web3.utils.toHex(amountOutMin.toString()),
                 web3.utils.toHex(amountInMax.toString()),
                 path,
                 to,
@@ -179,13 +180,12 @@ const swaptotaltoken = async (web3, route, valueinput) => {
                 console.log("token swap else", TOKENS[arr_algo[i]], TOKENS[arr_algo[i + 1]])
                 arr_amount = resultnew.total
                 // arr_amount = `${arr_amount}`
-                arr_amount = Number(arr_amount);
-                // `${amount}e+${decimals}`;
                 // console.log("show wei", arr_amount)
-                arr_amount = arr_amount.toFixed(4);
+                arr_amount =  arr_amount.toString()
                 // arr_amount = arr_amount.toFixed(7)
                 console.log("hash =>", resultnew.contractnew);
                 transaction_hash.push(resultnew.contractnew.transactionHash)
+                // console.log("transaction_hash_InFunction", resultnew.contractnew.transactionHash);
             }
         }
     } catch (error) {
