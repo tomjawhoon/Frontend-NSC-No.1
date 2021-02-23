@@ -76,16 +76,11 @@ const ExchangeContainer = (initialId) => {
       setCheck(false);
       setHash(res_swaptotalcoin.transaction_hash)
       setPrice(res_swaptotalcoin.arr_amount)
-
       localStorage.setItem('Hash', JSON.stringify(res_swaptotalcoin.transaction_hash));
       localStorage.setItem('Price', JSON.stringify(res_swaptotalcoin.arr_amount));
-
       localStorage.setItem('Show', 'true');
-
-
       console.log("parseFloat", parseFloat(res_swaptotalcoin.arr_amount))
       console.log("show parseFloat", parseFloat(valueinput))
-
       if (parseFloat(res_swaptotalcoin.arr_amount) <= parseFloat(valueinput)) {
         setProfit(false)
         //low-profits
@@ -175,20 +170,7 @@ const ExchangeContainer = (initialId) => {
           </div>
         </Btn_Exchange>
         <Btn_Exchange>
-          {check ?
-            <Steps current={1} progressDot={customDot}>
-              {Hash.map((x, index) => {
-                // console.log("index=<>",index)
-                <div key={index}>
-                  <Step title="START" description="Just a Moment." />
-                  <Step title="In Progress" description="Just a Moment." />
-                  <Step title="Waiting" description="Just a Moment." />
-                  <Step title="Finish" description="Just a Moment." />
-                </div>
-                console.log("index=<>", index)
-              })}
-            </Steps>
-            : <div></div>}
+          {check ? <div className="spin-ex"><Spin size="large" style={{height:"50%"}} /></div> : <div></div>}
         </Btn_Exchange>
         {/* <Button type="primary" onClick={showModal}>
           Open Modal

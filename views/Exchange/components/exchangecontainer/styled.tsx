@@ -189,8 +189,12 @@ export const Btn_Exchange = styled.div`
     text-align: center;
     width: 100%;
     color: #fff;
-    
   }
+  .ant-spin-dot-item {
+    background-color: #FFA500;
+  }
+
+.ant-spin.ant-spin-lg .anticon.ant-spin-dot: {font-size: 150px}
 
   .exchange-btn:hover {
     color: #0559af;
